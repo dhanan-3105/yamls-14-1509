@@ -189,3 +189,22 @@ Install Libraries
          compartment_id:
          vcn_id: "get the vcnid of the vcn which you want to delete"
          state: "absent"
+
+
+- name : List Buckets with Namespaces
+  collections:
+    - oracle.oci
+  connection: local
+  hosts: localhost
+  tasks:
+  - name: Get Namespace   
+    oci_object_storage_namespace_facts:
+    register: result
+  - name: Get Buckets
+    oci_object_storage_bucket_facts:
+      compartment_id:  " "
+      namespace_name: {{result.namespace}}
+    register: bucketlist
+  - name: print Buckets
+    debug:
+     msg: "All Bucket list {{bucketlist}}"
