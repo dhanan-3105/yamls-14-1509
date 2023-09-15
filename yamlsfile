@@ -170,3 +170,22 @@ Install Libraries
    - name: print all ad facts
      debug:
        msg: {{vcn_facts}}  
+
+
+- name: Get VCN Facts
+  hosts: localhost
+  collections:
+    - oracle.oci
+  tasks:
+   - name: Creates VCN Facts
+     oci_network_vcn:
+        compartment_id:
+        display_name:
+        dns_label:
+        state: "present"
+    
+   - name: delete a VCN
+     oci_network_vcn:
+         compartment_id:
+         vcn_id: "get the vcnid of the vcn which you want to delete"
+         state: "absent"
