@@ -114,6 +114,9 @@ Install Libraries
   tasks:
     - name: install docker
       command: yum install -y docker
+    - name: start docker
+      command: systemctl start docker
+
     - name: deploy nginx docker container
       command: docker run -d  --name testapache  -p 8085:80 httpd
     - name: list all containers
