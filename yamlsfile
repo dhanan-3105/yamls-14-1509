@@ -156,3 +156,17 @@ Install Libraries
    - name : print ADs
      debug:
        msg: {{ result }}
+
+- name: Get VCN Facts
+  hosts: localhost
+  collections:
+    - oracle.oci
+  tasks:
+   - name: get all VCN Facts
+     oci_network_vcn_facts:
+      compartment_id: "yourcompartment-ocid"
+     register: vcn_facts
+
+   - name: print all ad facts
+     debug:
+       msg: {{vcn_facts}}  
